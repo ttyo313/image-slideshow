@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Slideshow</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+    }
+    img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <img id="slide" src="" alt="Slideshow">
+  <script>
+    let images = [];
+    let index = 0;
+    const img = document.getElementById('slide');
+    const interval = 10000; // 10초
+
+    async function loadImages() {
+      images = await window.electronAPI.getImages();
+    }
+
+    function showNextImage() {
+      if (images.length === 0) return;
+      img.src = images[index];
+      index = (index + 1) % images.length;
+    }
+
+    async function startSlideshow() {
+      await loadImages();
+      showNextImage();
+      setInterval(showNextImage, interval);
+    }
+
+    startSlideshow();
+  </script>
+</body>
+</html>
