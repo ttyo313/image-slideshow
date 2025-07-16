@@ -19,10 +19,10 @@ cloudinary.config({
 // 📌 MongoDB 연결
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 })
-.then(() => console.log('✅ MongoDB 연결 성공'))
-.catch(err => console.error('❌ MongoDB 연결 실패:', err));
+.then(() => console.log('✅ MongoDB connected!'))
+.catch((err) => console.error('❌ MongoDB connection error:', err));
 
 // 📌 이미지 모델 정의
 const imageSchema = new mongoose.Schema({
